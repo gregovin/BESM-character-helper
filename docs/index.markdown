@@ -1,5 +1,4 @@
 ---
-layout: default
-title: BESM character helper
+layout: home
 ---
 This page is designed to assist in the creation of characters with the BESM rpg system

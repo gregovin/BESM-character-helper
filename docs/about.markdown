@@ -1,6 +1,5 @@
 ---
-layout: page
-style: "/assets/css/styles.css"
+layout: default
 title: About
 permalink: /BESM-character-helper/about/
 ---

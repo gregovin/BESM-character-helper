@@ -62,3 +62,27 @@ detail type: the type of bonus used
   everyOtherO: every odd rank bonus is added. Always additive
   everyOtherE: every even rank bonus is added. Always additive
   and skillBonus: adds the bonus from a skill to something else, such as a save. Always considered flat.
+detail target: targets are almost always formatted "type name" where name is arbitrary. Occasionally, a skillname or stat will be in parenthasis next to a target. This specifies that the target thing's base value is modified by that stat bonus or skill rank. Typing specified bellow.
+  c: the target is some custom or special target unique to the attribute(ie if it gives you some save or something special)
+  comb: specifies that a value should be added to the combat section for ease of finding
+  [special attribute sba]: short abbreviation specifying the special attribute, used for attributes like Alternate form where it will require special code and has "points" that must be used to purchase "things". Usually uses [sba]:CP but sometimes other ones are used
+  skill: targets a skill
+  check: targets a check of some kind, usually a custom one
+  armor: targets the standard armor value or a custom one
+  CP: targets the character's character points
+  SP: targets the character's skill points
+  BAB: targets the base attack bonus
+  HP: targets the character's hit points
+  d[n]HitDice: targets the character's dn hit dice and gives more max hp as hit dice normally would
+  AC: targets your Armor Class or a custom AC value
+  counter: a custom counter for something
+  EP: energy points
+  s[stat]: specifies that a stat needs a bonus, used for Enhanced ability. So sWis means the wisdom stat should recieve additional points
+  attack: some attack bonus.
+  val: a value, usually cCombVal to specify it is a custom one in the combat section. Can target a special value with a parent, so cCombVal Exorcism>energy drain targets the custom energy drain value under the exorcism attack
+  AttackDesc: sets the description of a specified attack to a value after a colon in the target. So "cAttackDesc Exorcism:A special attack that does stuff and things" sets the description of the exorcism attack
+  extraAttacks: the standard extra attack value
+  extraDefenses: the standard extra defenses value
+  DC: targets a DC, usually cCombDC for most abilities
+  Save: targets a saving through, usually cCombSave
+  SaveDesc: the description of the specified save, similar to AttackDesc

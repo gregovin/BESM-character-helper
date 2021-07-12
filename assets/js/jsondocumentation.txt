@@ -1,0 +1,64 @@
+class rpgclass:
+  className(text): name of the classes
+  level(int): not part of the json but very important to keep track of for the character
+  SN(text: 2 letter): A short/save name used to keep links and stuff short
+  abprog(float: 0.5, 0.75, or 1): attack bonus is [abprog]*[level]
+  prefSave(text): a regex containing saves like "Ref|Will", "Fort", or "" to describe which saves get bonuses
+  skillBasis(int): number of skill points at level one is ([skillBasis]+[int])*4 or [skillBasis]+[int]
+  hitDie(int): describes the hit die of the character, so hitDie: 8 means the character has d8 hit die
+  keyAbilities(text): a description of which abilities are relevant for text viewing.
+  attributes(ls[ls[text]]): contains lists of which attributes a character gets at individual levels for their class. Attributes[0] is the list of attributes they get at level 1, for example. There are special attributes such as CP, which targets CP, and Feat: or Skill: which target feats or skills instead of standard Attributes
+  nonCombSkills(list[text]): a list of non-combat class skills
+  combatSkills: a list of combat class skills
+  specialNote: any special notes associated with the class
+
+class race:
+  raceName(text): name of the race
+  SN(text: 2 letter): A short/save name used to keep links and stuff short
+  cost(int): the cp cost of the race
+  baseAttributes(list[text]): a list of attributes, many special ones that are going to be a pain deal with
+  lvlbonus(text): a bonus you get every level, which is only relevant for humans so shrug
+
+class attributes:
+  className(text): name of attributes
+  ability(text): name of the ability relevant to the ability, regex again
+  progDesc(text): description of the progression from the handbook
+  progressions(list[class progression]): describes ways the ability can progress depending on the version/cost
+    class progression:
+      subname(text): a relevant name for this progression(such as partially powered or 2-cp)
+      cost(int): cp cost/rank for this progression
+      progType(text): a special field that can contain various things, documented following the attribute class
+      progAmount(int): amount of progression, may not appear
+      descProgDetails(list[text]): list of text for descriptive progression tiles, may not appear
+      choiceType(text): type of choice, can be a few things, normally a text choice, more details bellow
+      choiceTypes(ls[text]): used for choices with multiple options
+      choicePrompt(text): prompt for text choices
+      selections(list[text]): selections for select choices
+      bonuses(list[class bonus]): list of bonuses for applying abilities
+        class bonus:
+          type(text): several types, listed bellow
+          target(text): specifies the target for the bonus. Can be something as simple as CP to as complex as a custom Save DC or custom save bonus
+          amount(int, sometimes text): the amount to add to the target. Occasionally replaced with text
+          text(text): text for type:text, rarely used
+      cusDesc(text): a custom description of this progression used to differentiate it from other progressions.
+  shortDesc(text): a short description of the attribute
+detail progType: the types of progression and what they mean
+  none: default prog type
+  "limit:n": progression is limited to n ranks of this attribute in this ability
+  specializations: every rank the attribute gains one specialization
+  choice, choicen: specifies that on selection of this attribute you need to make a choice of some kind, with multiple choices choice0, choice1,...choicen is used to tell how many need to be made
+  descriptive: means that for progression the system should access the list descProgDetails at index rank-1 to display text determining how awesome the ability is
+detail choiceType/choiceTypes: choiceType and choiceTypes behave identically, just with choiceTypes there is a list of multiple kinds.
+  text: any text can be entered, requires choicePrompt to prompt the creator
+  select: there is a specific set of options, creator must choose 1
+  "sel:[special]": user must select something from a special list determined by their character, so "sel:aType" means the user must select an attack type. Currently, aType means attack type, attribute means any attribute, and save means a save of your chocie.
+detail type: the type of bonus used
+  additive: bonus accumulates every rank, so +2 at rank 1 becomes +4 at rank 2...
+  flat: bonus is added only on the first rank
+  dice: bonus amount is in dice and changes the type of amount to text: dice formula
+  choice/choicen: This bonus uses the nth(or only) choice made for progression earlier
+  combText: adds text to the combat section of the document
+  text: adds text to an ability of some kind. Always flat. Replaces amount with text
+  everyOtherO: every odd rank bonus is added. Always additive
+  everyOtherE: every even rank bonus is added. Always additive
+  and skillBonus: adds the bonus from a skill to something else, such as a save. Always considered flat.

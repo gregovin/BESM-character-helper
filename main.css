@@ -52,3 +52,9 @@ a.active{
 .menu{
   margin-right: 5%;
 }
+
+/* stuff for the site*/
+.contents{
+  padding: 40px 80px;
+  text-align:center;
+}

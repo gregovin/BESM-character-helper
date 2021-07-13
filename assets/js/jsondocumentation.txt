@@ -23,15 +23,15 @@ class attributes:
   className(text): name of attributes
   ability(text): name of the ability relevant to the ability, regex again
   progDesc(text): description of the progression from the handbook
+  requirements(list[text]): a rare list of requirements that only exists because of train a cute monster
   progressions(list[class progression]): describes ways the ability can progress depending on the version/cost
     class progression:
       subname(text): a relevant name for this progression(such as partially powered or 2-cp)
       cost(int): cp cost/rank for this progression
       progType(text): a special field that can contain various things, documented following the attribute class
       progAmount(int): amount of progression, may not appear
-      descProgDetails(list[text]): list of text for descriptive progression tiles, may not appear
-      choiceType(text): type of choice, can be a few things, normally a text choice, more details bellow
-      choiceTypes(ls[text]): used for choices with multiple options
+      choices(int): number of choices present, usually 0
+      choiceTypes(ls[text]): used to determine the types of choices used
       choicePrompt(text): prompt for text choices
       selections(list[text]): selections for select choices
       bonuses(list[class bonus]): list of bonuses for applying abilities
@@ -41,6 +41,7 @@ class attributes:
           amount(int, sometimes text): the amount to add to the target. Occasionally replaced with text
           text(text): text for type:text, rarely used
       cusDesc(text): a custom description of this progression used to differentiate it from other progressions.
+  descProgDetails(list[text]): list of text for descriptive progression tiles, may not appear, used for descriptive progression
   shortDesc(text): a short description of the attribute
 detail progType: the types of progression and what they mean
   none: default prog type
@@ -55,7 +56,10 @@ detail choiceType/choiceTypes: choiceType and choiceTypes behave identically, ju
 detail type: the type of bonus used
   additive: bonus accumulates every rank, so +2 at rank 1 becomes +4 at rank 2...
   flat: bonus is added only on the first rank
+  multiplicative: amount is added to a bonus, then the bonus is multiplied by [rank]
+  exp: bonus is multiplied by a fixed value each rank, must be paired with a flat bonus to function
   dice: bonus amount is in dice and changes the type of amount to text: dice formula
+  var: bonus amount changes to type text: formula
   choice/choicen: This bonus uses the nth(or only) choice made for progression earlier
   combText: adds text to the combat section of the document
   text: adds text to an ability of some kind. Always flat. Replaces amount with text
@@ -79,10 +83,12 @@ detail target: targets are almost always formatted "type name" where name is arb
   EP: energy points
   s[stat]: specifies that a stat needs a bonus, used for Enhanced ability. So sWis means the wisdom stat should recieve additional points
   attack: some attack bonus.
+  Init: targets initiative
   val: a value, usually cCombVal to specify it is a custom one in the combat section. Can target a special value with a parent, so cCombVal Exorcism>energy drain targets the custom energy drain value under the exorcism attack
   AttackDesc: sets the description of a specified attack to a value after a colon in the target. So "cAttackDesc Exorcism:A special attack that does stuff and things" sets the description of the exorcism attack
   extraAttacks: the standard extra attack value
   extraDefenses: the standard extra defenses value
   DC: targets a DC, usually cCombDC for most abilities
   Save: targets a saving through, usually cCombSave
-  SaveDesc: the description of the specified save, similar to AttackDesc
+  saveDesc: the description of the specified save, similar to AttackDesc
+  attackDamage: damage done by an attack of a specific name

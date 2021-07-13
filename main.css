@@ -1,0 +1,54 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  position: relative;
+}
+h1{
+  font-size: 90px;
+  color: darkgreen;
+  padding: 10px 0px;
+}
+h2{
+  font-size: 25px;
+  color: darkgreen;
+  font-weight: normal;
+  padding-bottom: 10px
+}
+h3{
+  color: darkgreen;
+}
+.navBar, .headerMenu{
+  z-index: 100000;
+}
+.navBar a{
+  text-decoration: none;
+  color: #fff;
+}
+a.active{
+  color: #00c000;
+}
+.headerMenu{
+  text-align: right;
+  background-color: #90ee90;
+  padding-top:10px;
+  padding-left:10px;
+  position: fixed;
+  width: 100%;
+}
+
+.navBar li{
+  display: inline-block;
+  list-style-type: none;
+  padding: 15px 15px;
+  color: #fff;
+  font-size: 15px;
+}
+.navBar li:hover{
+  background-color: #447700;
+  border-radius: 5px;
+}
+.menu{
+  margin-right: 5%;
+}

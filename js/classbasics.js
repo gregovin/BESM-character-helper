@@ -7,7 +7,7 @@ function otherSave(level){
 
 function rpgClassHandler(){
 
-	get name(rpgClass){
+	this.getName=function(rpgClass){
 		return rpgClass.className
 	}
 	this.getAttackBonus=function(level,rpgClass){
@@ -35,5 +35,5 @@ function rpgClassHandler(){
 	}
 	this.otherLevel=function(int,rpgClass){
 		return this.skillBasis+int
-	}	
+	}
 }
